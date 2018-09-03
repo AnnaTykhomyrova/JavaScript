@@ -10,52 +10,59 @@ $(document).ready(function () {
 
         $('html, body').animate({
             scrollTop: $(id).offset().top
-        }, 500);
+        }, 900);
     });
 
     //Slick-slider
-    $('#slider').slick({
+    $('.slider').slick({
         autoplay: true,
+        dots: true,
+        dotsClass: "my-dots",
         arrows: false,
-        mobileFirst: true
+        speed: 1500,
+        infinite: true
     });
+
+    //Isotope
+    var $isotopeGrid = $('.isotop_container');
+
+    $isotopeGrid.isotope({
+        itemSelector: '.img-wrapper',
+        percentPosition: true
+    });
+
+    $('.all_isotop_container .filter a').click(function () {
+        var filterValue = $(this).data('filter');
+
+        $isotopeGrid.isotope({
+            filter: filterValue
+        });
+    });
+    $('.links').on('click', function(e){
+        e.preventDefault();})
+
+    //Google-map
+    var mapHolder = document.getElementById('map'),
+        lat = 49.568583,
+        lon = 34.585416;
+
+    displayMap(mapHolder, lat, lon);
+
+    function displayMap(mapHolder, lat, lon) {
+        var center = new google.maps.LatLng(lat, lon),
+            marker = new google.maps.Marker({
+                position: center,
+                icon: "../js/Marker.png"
+            }),
+            mapProp= {
+                center: center,
+                zoom: 16,
+                disableDefaultUI: true
+            };
+
+        var map = new google.maps.Map(mapHolder, mapProp);
+
+        marker.setMap(map);
+        $(mapHolder).show();
+    }
 });
-//     //Isotope
-//     var $isotopeGrid = $('.portfolio-images');
-//
-//     $isotopeGrid.isotope({
-//         itemSelector: '.img-wrapper',
-//         percentPosition: true
-//     });
-//
-//     $('.portfolio .filters button').click(function () {
-//         var filterValue = $(this).data('filter');
-//
-//         $isotopeGrid.isotope({
-//             filter: filterValue
-//         });
-//     });
-//
-//     //Google-Map
-//     showMap(document.getElementById("map"), 50, 20);
-//
-//     function showMap(mapElement, lat, lon) {
-//         var center = new google.maps.LatLng(lat, lon);
-//
-//         var marker = new google.maps.Marker({
-//             position: center,
-//             animation: google.maps.Animation.BOUNCE,
-//             label: "I am draggable!",
-//             draggable: true
-//         });
-//
-//         var mapProp= {
-//             center: center,
-//             zoom: 10,
-//             disableDefaultUI: true,
-//             mapTypeId: 'terrain'
-//         };
-//         var map =new google.maps.Map(mapElement, mapProp);
-//         marker.setMap(map);
-//     }
-// });
