@@ -19,7 +19,7 @@ $(document).ready(function () {
         dots: true,
         dotsClass: "my-dots",
         arrows: false,
-        speed: 1500,
+        speed: 2000,
         infinite: true
     });
 
@@ -52,7 +52,7 @@ $(document).ready(function () {
         var center = new google.maps.LatLng(lat, lon),
             marker = new google.maps.Marker({
                 position: center,
-                icon: "../js/Marker.png"
+                icon: {url: "js/Marker.png"}
             }),
             mapProp= {
                 center: center,
